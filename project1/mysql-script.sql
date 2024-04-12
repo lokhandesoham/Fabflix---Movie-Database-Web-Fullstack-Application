@@ -1,1 +1,1 @@
-SELECT * FROM stars
+SELECT * FROM star
