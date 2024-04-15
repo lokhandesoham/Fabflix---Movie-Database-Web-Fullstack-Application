@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Movie List</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+<table id="movie_table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Year</th>
+            <th>Director</th>
+            <th>Genres</th>
+            <th>Stars</th>
+            <th>Rating</th>
+        </tr>
+    </thead>
+    <tbody id="movie_table_body">
+        <!-- Table rows will be populated dynamically using JavaScript -->
+    </tbody>
+</table>
+
+<!-- Load jQuery and Bootstrap JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<!--script src="index.js"></script>-->
+
+
+<script>
+    function handleStarResult(resultData) {
+        let movieTableBodyElement = document.getElementById("movie_table_body");
+
+        resultData.forEach(movie => {
+            let row = movieTableBodyElement.insertRow();
+
+            let titleCell = row.insertCell(0);
+            let titleLink = document.createElement("a");
+            titleLink.href = "movie-details.html?title=" + encodeURIComponent(movie.title); // Adjust URL as needed
+            titleLink.textContent = movie.title;
+            titleCell.appendChild(titleLink);
+
+            let yearCell = row.insertCell(1);
+            yearCell.textContent = movie.year;
+
+            let directorCell = row.insertCell(2);
+            directorCell.textContent = movie.director;
+
+            let genresCell = row.insertCell(3);
+            genresCell.textContent = movie.genres;
+
+            let starsCell = row.insertCell(4);
+            let starsArray = movie.stars.split(", ");
+            starsArray.forEach(star => {
+                let starLink = document.createElement("a");
+                starLink.href = "single-star.html?name=" + encodeURIComponent(star);
+                starLink.textContent = star;
+                starLink.style.display = "block"; // Each star on a new line
+                starsCell.appendChild(starLink);
+            });
+
+            let ratingCell = row.insertCell(5);
+            ratingCell.textContent = movie.rating;
+        });
+    }
+
+    // AJAX call to fetch movie data from backend
+    function fetchMovieData() {
+        jQuery.ajax({
+            dataType: "json",
+            method: "GET",
+            url: "movies", // Updated URL
+            success: (resultData) => handleStarResult(resultData),
+            error: (xhr, status, error) => {
+                console.error("AJAX Error:", status, error);
+                alert("Failed to fetch movie data. Please try again later.");
+            }
+        });
+    }
+
+    // Call fetchMovieData function when the page loads
+    window.onload = fetchMovieData;
+</script>
+
+</body>
+</html>
+
