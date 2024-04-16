@@ -15,6 +15,20 @@ CREATE TABLE stars (
                        birthYear INT
 );
 
+CREATE TABLE creditcards (
+                             id VARCHAR(20) PRIMARY KEY,
+                             firstName VARCHAR(50) NOT NULL,
+                             lastName VARCHAR(50) NOT NULL,
+                             expiration DATE NOT NULL
+);
+
+CREATE TABLE ratings (
+                         movieId VARCHAR(10) NOT NULL,
+                         rating FLOAT NOT NULL,
+                         numVotes INT NOT NULL,
+                         FOREIGN KEY (movieId) REFERENCES movies(id)
+);
+
 CREATE TABLE stars_in_movies (
                                  starId VARCHAR(10) NOT NULL,
                                  movieId VARCHAR(10) NOT NULL,
@@ -57,16 +71,5 @@ CREATE TABLE sales (
                        FOREIGN KEY (movieId) REFERENCES movies(id)
 );
 
-CREATE TABLE creditcards (
-                             id VARCHAR(20) PRIMARY KEY,
-                             firstName VARCHAR(50) NOT NULL,
-                             lastName VARCHAR(50) NOT NULL,
-                             expiration DATE NOT NULL
-);
 
-CREATE TABLE ratings (
-                         movieId VARCHAR(10) NOT NULL,
-                         rating FLOAT NOT NULL,
-                         numVotes INT NOT NULL,
-                         FOREIGN KEY (movieId) REFERENCES movies(id)
-);
+
