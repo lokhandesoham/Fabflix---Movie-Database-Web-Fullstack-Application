@@ -21,6 +21,8 @@
 </head>
 <body>
 
+<h1 style="text-align: center;">Top 20 Rated Movies</h1>
+
 <table id="movie_table">
     <thead>
         <tr>
@@ -42,7 +44,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
-<!--script src="index.js"></script>-->
+
 
 
 <script>
@@ -54,7 +56,7 @@
 
             let titleCell = row.insertCell(0);
             let titleLink = document.createElement("a");
-            titleLink.href = "movie-details.html?title=" + encodeURIComponent(movie.title); // Adjust URL as needed
+            titleLink.href = "singlemovie.html?id=" + encodeURIComponent(movie.title); // Adjust URL as needed
             titleLink.textContent = movie.title;
             titleCell.appendChild(titleLink);
 
@@ -71,9 +73,9 @@
             let starsArray = movie.stars.split(", ");
             starsArray.forEach(star => {
                 let starLink = document.createElement("a");
-                starLink.href = "single-star.html?name=" + encodeURIComponent(star);
+                starLink.href = "singlestar.html?id=" + encodeURIComponent(star);
                 starLink.textContent = star;
-                starLink.style.display = "block"; // Each star on a new line
+                starLink.style.display = "block"; 
                 starsCell.appendChild(starLink);
             });
 
@@ -87,7 +89,7 @@
         jQuery.ajax({
             dataType: "json",
             method: "GET",
-            url: "movies", // Updated URL
+            url: "movies", 
             success: (resultData) => handleStarResult(resultData),
             error: (xhr, status, error) => {
                 console.error("AJAX Error:", status, error);
@@ -102,4 +104,3 @@
 
 </body>
 </html>
-
