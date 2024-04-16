@@ -1,0 +1,68 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+}
+
+/* Heading Styles */
+h1 {
+    text-align: center;
+    color: #343a40;
+    margin-top: 20px;
+    font-size: 2em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    margin-top: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+th, td {
+    border: 1px solid #dee2e6;
+    padding: 12px;
+}
+
+th {
+    background-color: #f8f9fa;
+    color: #343a40;
+    font-weight: bold;
+}
+
+/* Table Row Hover Effect */
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Description Part of the Table */
+.description {
+    background-color: #e9ecef; /* Choose your desired background color */
+    color: #495057; /* Choose your desired text color */
+}
+
+/* Navigation Link Styles */
+.home-button {
+    display: inline-block;
+    padding: 10px 20px;
+    text-align: center;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.home-button:hover {
+    background-color: #0056b3;
+}
+
+.home-button:active {
+    transform: translateY(2px);
+}
