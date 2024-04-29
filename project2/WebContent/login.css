@@ -1,0 +1,72 @@
+/* Base styles for the body to apply a dark theme */
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-image: url('WebContent/Screenshot_2024-04-28_at_2.18.49_AM.png'); /* Adjust the path to your background */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Style for the form wrapper to add dark overlay */
+.form-wrapper {
+    width: 100%;
+    max-width: 400px;
+    background: rgba(0, 0, 0, 0.8); /* Dark overlay */
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* The form itself */
+form {
+    background: transparent;
+}
+
+/* The form title */
+h2 {
+    color: #E50914; /* Netflix red */
+    margin-bottom: 1rem; /* Space between the title and the form */
+}
+
+/* Input fields styling */
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent inputs */
+}
+
+/* Styling for the submit button */
+input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #E50914; /* Netflix red */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    opacity: 0.9;
+}
+
+/* Style for error messages */
+#login_error_message {
+    color: #FFA00A;
+    text-align: center;
+    margin-top: 20px;
+}
