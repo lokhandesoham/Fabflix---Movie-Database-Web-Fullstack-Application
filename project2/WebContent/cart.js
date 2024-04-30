@@ -15,6 +15,13 @@ $(document).ready(function() {
                     movieCountMap.set(movie, (movieCountMap.get(movie) || 0) + 1);
                 });
 
+                const movieTitles = [];
+                const movieCounts = [];
+                movieCountMap.forEach((count, title) => {
+                    movieTitles.push(title); // Add movie title to the movieTitles array
+                    movieCounts.push(count); // Add movie count to the movieCounts array
+                });
+
                 // Update the cart table body with retrieved cart items
                 const cartBody = $('#cart_body');
                 cartBody.empty(); // Clear existing items
@@ -32,8 +39,15 @@ $(document).ready(function() {
                         row.append($('<td>').text(count));
                         row.append($('<td>').text("$10"));
                         row.append($('<td>').text("$"+(count * 10).toFixed(2)));
+                        //row.append($('<td>').append($('<button>').addClass('remove_item_button').text('Remove')));
+
+                        const addButton = $('<button>').addClass('quantity_button').data('type', 'plus').text('+');
+                        const minusButton = $('<button>').addClass('quantity_button').data('type', 'minus').text('-');
+
+                        row.append($('<td>').append(addButton).append(minusButton));
+   
                         row.append($('<td>').append($('<button>').addClass('remove_item_button').text('Remove')));
-                    
+
                     cartBody.append(row);
                 });
 
@@ -78,31 +92,41 @@ $(document).ready(function() {
                 fetchCartData();
             },
             error: function(xhr, status, error) {
+                console.error(xhr.responsecsText);
+            }
+        });
+    });
+
+    $(document).on('click', '.quantity_button', function() {
+        console.log('In quantity:');
+        const buttonType = $(this).data('type'); // Get the button type (+ or -)
+        const row = $(this).closest('tr');
+        var movieTitle = $(this).closest('tr').find('td:first-child').text();
+
+        let quantityChange;
+        if (buttonType === 'plus') {
+            quantityChange = 1; // Increase quantity by 1 for + button
+        } else if (buttonType === 'minus') {
+            quantityChange = 0; // Decrease quantity by 1 for - button
+        }
+
+        // Send AJAX POST request to update quantity in cart
+        $.ajax({
+            url: 'cart', // URL to CartServlet
+            type: 'POST',
+            data: { title: movieTitle, quantityChange: quantityChange },
+            success: function(response) {
+                // If successful, fetch updated cart data and refresh cart table
+                fetchCartData();
+            },
+            error: function(xhr, status, error) {
                 console.error(xhr.responseText);
             }
         });
     });
 
 
-    // // Event listener for Remove button clicks
-    // $(document).on('click', '.remove_item_button', function() {
-    //     const row = $(this).closest('tr');
-    //     correspo = row.find('td:first').text(); // Assuming title is in the first column
-    //     // Send POST request to CartServlet to remove item
-    //     $.ajax({
-    //         url: 'cart', // URL to CartServlet
-    //         type: 'POST',
-    //         data: { item: title ,
-    //                 remove: "yes"},
-    //         success: function(response) {
-    //             // If successful, fetch updated cart data and refresh cart table
-    //             fetchCartData();
-    //         },
-    //         error: function(xhr, status, error) {
-    //             console.error(xhr.responseText);
-    //         }
-    //     });
-    // });
+   
 
     // Proceed to Payment button click event
     $('#proceed_to_payment').click(function() {
@@ -113,11 +137,34 @@ $(document).ready(function() {
             movieCountMap.set(title, count);
         });
 
+        const movieTitles = [];
+        const movieCounts = [];
+        movieCountMap.forEach((count, title) => {
+            movieTitles.push(title); // Add movie title to the movieTitles array
+            movieCounts.push(count); // Add movie count to the movieCounts array
+        });
+
+        console.log("In payament proceed button");
+        console.log(movieTitles);
+        console.log(movieCounts);
+
+
         // Get the total price from the cart page
         const totalPrice = parseFloat($('#total_price').text().replace('$', ''));
 
+        const queryParams = new URLSearchParams();
+        queryParams.set('movieTitles', JSON.stringify(movieTitles));
+        queryParams.set('movieCounts', JSON.stringify(movieCounts));
+        queryParams.set('totalPrice', totalPrice);
+
+        console.log("payment.html?$"+queryParams.toString());
         // Redirect to payment.html with query parameters
-        window.location.href = `payment.html?movieCountMap=${encodeURIComponent(JSON.stringify([...movieCountMap]))}&totalPrice=${totalPrice}`;
+        window.location.href = `payment.html?${queryParams.toString()}`;
+
+        console.log("Donne");
+
+
+        //window.location.href = `payment.html?movieTitles=${encodeURIComponent(JSON.stringify([movieTitles]))}&movieCounts=${encodeURIComponent(JSON.stringify([movieCounts]))}&totalPrice=${totalPrice}`;
     });
   
 });

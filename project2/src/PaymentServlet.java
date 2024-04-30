@@ -2,7 +2,11 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.text.ParseException;
@@ -49,47 +53,61 @@ public class PaymentServlet extends HttpServlet {
         }
     }
 
-    private String toJsonString(List<SaleData> salesList) {  
-        
-        StringBuilder jsonBuilder = new StringBuilder("[");
-        for (SaleData sale : salesList) {
-            jsonBuilder.append("{")
-                    .append("\"saleid\":").append(sale.saleId).append(",")
-                    .append("\"title\":\"").append(sale.title).append("\",")
-                    .append("\"quantity\":").append(sale.quantity).append(",")
-                    .append("\"price\":").append(sale.price)
-                    .append("},");
-        }
-        if (jsonBuilder.length() > 1) {
-            jsonBuilder.deleteCharAt(jsonBuilder.length() - 1); // Remove the last comma
-        }
-        jsonBuilder.append("]");
-        return jsonBuilder.toString();
-    }
+    
 
 
     /**
      * handles POST requests to add and show the item list information
      */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String movieCountMapString = request.getParameter("movieCountMapString");
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException 
+    {
+        HttpServletResponse httpResponse = (HttpServletResponse) response;
+
+        
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
         String creditCardNumber = request.getParameter("creditCardNumber");
         String expirationDate = request.getParameter("expirationDate");
         String total = request.getParameter("total");
 
-        System.out.println(firstName);
-        System.out.println(lastName);
-        System.out.println(creditCardNumber);
-        System.out.println(expirationDate);
-        System.out.println(movieCountMapString);
+        String movieTitles = request.getParameter("movieTitles");
+        String movieCounts = request.getParameter("movieCounts");
 
-        // if (expirationDateString == null || expirationDateString.isEmpty()) {
-        //     // Handle the error or return an appropriate response
-        //     response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Expiration date is required");
-        //     return;
-        // }
+        System.out.println("F-"+firstName);
+        System.out.println("L-"+lastName);
+        System.out.println("CC-"+creditCardNumber);
+        System.out.println("E-"+expirationDate);
+        System.out.println("T-"+movieTitles);
+        System.out.println("C-"+movieCounts);
+        System.out.println("To-"+total);
+
+        String[] m_titles = movieTitles.substring(1, movieTitles.length() - 1).split(",");
+        ArrayList<String> movieList = new ArrayList<>();
+
+        // Trim each element and add it to the ArrayList
+        for (String movie : m_titles) {
+            movieList.add(movie.trim().substring(1, movie.length() - 1));
+        }
+
+        // Print the ArrayList to verify
+         for (String s : movieList) System.out.print("Movie-"+s);
+
+
+
+        String[] m_count = movieCounts.substring(1, movieCounts.length() - 1).split(",");
+        ArrayList<Integer> countList = new ArrayList<>();
+
+        // Trim each element and add it to the ArrayList
+        for (String c : m_count) {
+    
+            countList.add(Integer.parseInt(c.trim()));
+        }
+            
+        for (int c : countList) System.out.println("Count-"+c);
+        
+        
+
+    
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         dateFormat.setLenient(false); // Disable lenient mode to ensure strict parsing
@@ -102,54 +120,39 @@ public class PaymentServlet extends HttpServlet {
         }
 
 
-        // movieCountMapString = movieCountMapString.substring(1, movieCountMapString.length() - 1);
-
-        // // Split the string by '],[' to get individual key-value pairs
-        // String[] keyValuePairs = movieCountMapString.substring(movieCountMapString.indexOf("[\"") + 2, movieCountMapString.lastIndexOf("\",1]") + 5).split("\\],\\[");
-
-        // System.out.println("keyValuePairs Map: " + Arrays.toString(keyValuePairs));
-
-        // // Create a map to store the parsed key-value pairs
-        // Map<String, Integer> movieCountMap = new HashMap<>();
-
-        // // Iterate through each key-value pair
-        // for (String pair : keyValuePairs) {
-        //     // Split the pair by ',' to separate key and value
-        //     String[] keyValue = pair.substring(1,-1).split(",");
-        //     System.out.println("keyValuePairs Map: " + Arrays.toString(keyValuePairs));
-        //     if (keyValue.length == 2) {
-        //         // Trim leading and trailing double quotes from key and parse the value as an integer
-        //         String key = keyValue[0].replace("\"", "").trim();
-        //         int value = Integer.parseInt(keyValue[1].trim());
-        //         // Add the key-value pair to the map
-        //         movieCountMap.put(key, value);
-        //     }
-        // }
-
-        // // Print the parsed map for verification
-        // System.out.println("Parsed Map: " + movieCountMap);
-     
-     
 
 
 
-
-
-        //List<String> keysList = new ArrayList<>(movieCountMap.keySet());
-
-
-
-
-        HttpSession session = request.getSession();
 
         
+        HttpSession session = request.getSession();
+
         String sessionId = session.getId();
         long lastAccessTime = session.getLastAccessedTime();
+        User email = (User)request.getSession().getAttribute("user");
+        String emailid = email.username;
 
-        // String email = (String) request.getSession().getAttribute("user");
-        // System.out.println("email" + email);
 
-        //List<SaleData> salesList = new ArrayList<>();
+        LocalDate currentDate = LocalDate.now();
+
+        // Define the date format using DateTimeFormatter
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+
+        // Format the current date using the defined format
+        String date = currentDate.format(dateFormatter);
+
+        // Print the formatted date
+        System.out.println("Current Date in yyyy/MM/dd format: " + date);
+  
+
+
+
+        System.out.println("CUURNT TIME -"+date);
+        System.out.println("email" + emailid);
+
+        ArrayList<String> salesList = new ArrayList<>();
+        String sale ="";
+    
         
         response.setContentType("application/json");
         PrintWriter out = response.getWriter();
@@ -176,92 +179,106 @@ public class PaymentServlet extends HttpServlet {
 
                 if(rs.next())
                 {
-            
-                //     for (String movieTitle : keysList) 
-                //     {
-                //         int movieId = -1;
-                //         int custId = -1;
-                //         try
-                //         {
-                //             String q1 = "SELECT id FROM movies WHERE title = '"+movieTitle+"' ";
-                //             ResultSet resultSet = statement.executeQuery(q1);
-                //             if (resultSet.next()) {
-                //                 movieId = resultSet.getInt("id");
-                //             }
-                //         } 
-                //         catch (SQLException e) {
-                //             System.out.println(e);
-                //         }
+                    System.out.println("Insideii");
+                    for (int i = 0; i < movieList.size(); i++) 
+                    {
+                        String movieId = "";
+                        int custId = -1;
+                        try
+                        {
+                            String q1 = "SELECT id FROM movies WHERE title = '"+movieList.get(i)+"' ";
+                            ResultSet resultSet = statement.executeQuery(q1);
+                            if (resultSet.next()) {
+                                movieId = resultSet.getString("id");
+                            }
+                        } 
+                        catch (SQLException e) {
+                            System.out.println(e);
+                        }
 
-                //         try
-                //         {
-                //             String q2 = "SELECT id FROM customers WHERE email = '"+email+"' ";
-                //             ResultSet resultSet = statement.executeQuery(q2);
-                //             if (resultSet.next()) {
-                //                 custId = resultSet.getInt("id");
-                //             }
-                //         } 
-                //         catch (SQLException e) {
-                //             System.out.println(e);
-                //         }
+                        try
+                        {
+                            String q2 = "SELECT id FROM customers WHERE email = '"+emailid+"' ";
+                            ResultSet resultSet = statement.executeQuery(q2);
+                            if (resultSet.next()) {
+                                custId = resultSet.getInt("id");
+                            }
+                        } 
+                        catch (SQLException e) {
+                            System.out.println(e);
+                        }
 
+                        System.out.println("mid- "+movieId+" cid- "+custId);
 
-                //         if(movieId!=-1 && custId!=1)
-                //         {
-                //             try 
-                //             {   for(int i = 0; i<movieCountMap.get(movieTitle); ++i)
-                //                 {
-
-                //                     String q3 = "INSERT INTO sales (customerId, movieId, saleDate) VALUES ( '"+custId+"' , '"+movieId+"' , '"+expirationDate+"' );";
-                //                     int saleid=-1;
-                //                     int rowsAffected = statement.executeUpdate(q3);
-                //                     if (rowsAffected <= 0) {
-                //                         System.out.println("Failed to add to sales");
-                //                     }
-                //                     else
-                //                     {
-                                        
-                //                         String q4 = "SELECT id FROM sales WHERE customerId = '"+custId+"' AND movieId = '"+movieId+"' saleDate = '"+expirationDate+"' ";
-                //                         ResultSet resultSet = statement.executeQuery(q4);
-                //                         if (resultSet.next()) {
-                //                             saleid = resultSet.getInt("id");
-                //                         } 
-                //                     }
+                        if(movieId!="" && custId!=-1)
+                        {
+                            try 
+                            {   
+                                String q3 = "INSERT INTO sales (customerId, movieId, saleDate, quantity) VALUES ( "+custId+" , '"+movieId+"' , '"+date+"' , "+countList.get(i)+" );";
+                                int saleid=-1;
+                                int rowsAffected = statement.executeUpdate(q3);
+                                if (rowsAffected <= 0) {
+                                    System.out.println("Failed to add to sales");
+                                }
+                                else
+                                {
                                     
-                //                     SaleData data = new SaleData(saleid, movieTitle, 1, 10);
-                //                     salesList.add(data);
+                                    String q4 = "SELECT id FROM sales WHERE customerId = "+custId+" AND movieId = '"+movieId+"' AND DATE_FORMAT(saleDate, '%Y/%m/%d') = '"+date+"' ";
+                                    ResultSet resultSet = statement.executeQuery(q4);
+                                    if (resultSet.next()) {
+                                        saleid = resultSet.getInt("id");
+                                    } 
+                                }
+                                
+                                sale += "SaleID-"+saleid +",,,Movie-" +movieList.get(i)+",,,Quantity-"+countList.get(i)+",,,Price-"+countList.get(i)*10+"||";
+                                salesList.add(sale);
 
-                //                 }
-                //             }
-                //             catch (Exception e) 
-                //             {
-                //                 JsonObject jsonObject = new JsonObject();
-                //                 jsonObject.addProperty("errorMessage", e.getMessage());
-                //                 out.write(jsonObject.toString());
-                //                 response.setStatus(500);
-                //             }
+                                
+                            }
+                            catch (Exception e) 
+                            {
+                                System.out.println("errorrr");
+                                System.out.println("Database error: " + e.getMessage());
+                                e.printStackTrace();
+                            }
 
 
-                //         }
-                //         else System.out.println("Movieid, Custid"+movieId+" "+custId);
+                        }
+                        else System.out.println("Movieid, Custid"+movieId+" "+custId);
 
                         
-                //    }
+                    }
 
-                    
-                //    String salesJson = toJsonString(salesList);
-                //    String encodedJson = URLEncoder.encode(salesJson, "UTF-8");
-                //    String redirectUrl = "confirm.html?salesList=" + encodedJson+"&total="+total;
-                //    System.out.println("confirmpage-"+redirectUrl);
-                //    response.sendRedirect(redirectUrl);
 
-                responseJsonObject.addProperty("status", "success");
-                    // Log to localhost log
-                request.getServletContext().log("Credentials approved");
-                // sample error messages. in practice, it is not a good idea to tell user which one is incorrect/not exist.
+                    System.out.println(sale);
+
+                    // String salesListParam = "";
+                    // for (String sale : salesList) {
+                    //     salesListParam += "&salesList=" + URLEncoder.encode(sale, StandardCharsets.UTF_8);
+                    // }
+
+                    // String redirectUrl = "confirm.html?" + salesListParam.substring(1) + "&total=" + total;
+
+                    // System.out.println(redirectUrl);
+                    // httpResponse.sendRedirect("confirm.html");
+                    // System.out.println("donzoo");
                 
-                responseJsonObject.addProperty("message", "correct card details");
                     
+        
+                    // String encodedJson = URLEncoder.encode(salesList, "UTF-8");
+                    // String redirectUrl = "confirm.html?salesList=" + encodedJson+"&total="+total;
+                    // System.out.println("confirmpage-"+redirectUrl);
+                    // response.sendRedirect(redirectUrl);
+
+                    responseJsonObject.addProperty("status", "success");
+                    responseJsonObject.addProperty("param", sale.substring(0, sale.length()-2));
+                    responseJsonObject.addProperty("total", total);
+                        // Log to localhost log
+                    request.getServletContext().log("Credentials approved");
+                    // sample error messages. in practice, it is not a good idea to tell user which one is incorrect/not exist.
+                    
+                    //responseJsonObject.addProperty("message", "Confirm Page");
+                        
                 }
                 else
                 {

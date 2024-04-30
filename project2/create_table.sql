@@ -67,6 +67,7 @@ CREATE TABLE sales (
                        customerId INT NOT NULL,
                        movieId VARCHAR(10) NOT NULL,
                        saleDate DATE NOT NULL,
+                       quantity INT DEFAULT 0,
                        FOREIGN KEY (customerId) REFERENCES customers(id),
                        FOREIGN KEY (movieId) REFERENCES movies(id)
 );

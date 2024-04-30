@@ -69,28 +69,29 @@ public class MoviesServlet extends HttpServlet {
                             "m.title, " +
                             "m.year, " +
                             "m.director, " +
-                            "( "+
-                            "SELECT GROUP_CONCAT(g.name ORDER BY g.name ASC) "+
-                            "FROM ( " +
-                            "SELECT g.name "+
-                            "FROM genres g " +
-                            "INNER JOIN genres_in_movies gm ON g.id = gm.genreId "+
-                            "WHERE gm.movieId = m.id "+
-                            "ORDER BY g.name ASC "+
-                            "LIMIT 3 "+
-                            ") g " +
-                            ") AS genres,"+
-                            "( " +
-                            "    SELECT GROUP_CONCAT(s.name ORDER BY total_movies DESC, s.name ASC)  " +
+                             "( " +
+                            "    SELECT GROUP_CONCAT(g.name ORDER BY g.name ASC) " +
                             "    FROM ( " +
-                            "        SELECT s.name, COUNT(sm.movieId) AS total_movies " +
-                            "        FROM stars s " +
-                            "         INNER JOIN stars_in_movies sm ON s.id = sm.starId " +
-                            "         WHERE sm.movieId = m.id " +
-                            "          GROUP BY s.id "+
-                            "        ORDER BY total_movies DESC, s.name ASC " +
+                            "        SELECT g.name " +
+                            "        FROM genres g " +
+                            "        INNER JOIN genres_in_movies gm ON g.id = gm.genreId " +
+                            "        WHERE gm.movieId = m.id " +
+                            "        ORDER BY g.name ASC " +
                             "        LIMIT 3 " +
-                            "    ) s " +
+                            "    ) g " +
+                            ") AS genres, " +
+                            "( " +
+                            "    SELECT GROUP_CONCAT(star_info.name ORDER BY star_info.total_movies DESC, star_info.name ASC) " +
+                            "    FROM ( " +
+                            "        SELECT s.id, s.name, COUNT(sm.movieId) AS total_movies " +
+                            "        FROM stars s " +
+                            "        INNER JOIN stars_in_movies sm ON s.id = sm.starId " +
+                            "        GROUP BY s.id " +
+                            "        ORDER BY total_movies DESC, s.name ASC " +
+                            "    ) AS star_info " +
+                            "    INNER JOIN stars_in_movies sm ON star_info.id = sm.starId " +
+                            "    WHERE sm.movieId = m.id " +
+                            "    LIMIT 3 " +
                             ") AS stars, " +
                             "ROUND(AVG(r.rating), 1) AS rating " +  // Round the average rating to 1 decimal place
                             "FROM " +
@@ -118,28 +119,29 @@ public class MoviesServlet extends HttpServlet {
                 "m.title, " +
                 "m.year, " +
                 "m.director, " +
-                "( "+
-                            "SELECT GROUP_CONCAT(g.name ORDER BY g.name ASC) "+
-                            "FROM ( " +
-                            "SELECT g.name "+
-                            "FROM genres g " +
-                            "INNER JOIN genres_in_movies gm ON g.id = gm.genreId "+
-                            "WHERE gm.movieId = m.id "+
-                            "ORDER BY g.name ASC "+
-                            "LIMIT 3 "+
-                            ") g " +
-                            ") AS genres,"+
-                            "( " +
-                            "    SELECT GROUP_CONCAT(s.name) "+ // ORDER BY total_movies DESC, s.name ASC)  " +
+                "( " +
+                            "    SELECT GROUP_CONCAT(g.name ORDER BY g.name ASC) " +
                             "    FROM ( " +
-                            "        SELECT s.name, COUNT(sm.movieId) AS total_movies " +
-                            "        FROM stars s " +
-                            "         INNER JOIN stars_in_movies sm ON s.id = sm.starId " +
-                            "         WHERE sm.movieId = m.id " +
-                            "          GROUP BY s.id "+
-                            "        ORDER BY total_movies DESC, s.name ASC " +
+                            "        SELECT g.name " +
+                            "        FROM genres g " +
+                            "        INNER JOIN genres_in_movies gm ON g.id = gm.genreId " +
+                            "        WHERE gm.movieId = m.id " +
+                            "        ORDER BY g.name ASC " +
                             "        LIMIT 3 " +
-                            "    ) s " +
+                            "    ) g " +
+                            ") AS genres, " +
+                            "( " +
+                            "    SELECT GROUP_CONCAT(star_info.name ORDER BY star_info.total_movies DESC, star_info.name ASC) " +
+                            "    FROM ( " +
+                            "        SELECT s.id, s.name, COUNT(sm.movieId) AS total_movies " +
+                            "        FROM stars s " +
+                            "        INNER JOIN stars_in_movies sm ON s.id = sm.starId " +
+                            "        GROUP BY s.id " +
+                            "        ORDER BY total_movies DESC, s.name ASC " +
+                            "    ) AS star_info " +
+                            "    INNER JOIN stars_in_movies sm ON star_info.id = sm.starId " +
+                            "    WHERE sm.movieId = m.id " +
+                            "    LIMIT 3 " +
                             ") AS stars, " +
                 "ROUND(AVG(r.rating), 1) AS rating " +  // Round the average rating to 1 decimal place
                 "FROM " +
@@ -163,28 +165,29 @@ public class MoviesServlet extends HttpServlet {
                         "m.title, " +
                         "m.year, " +
                         "m.director, " +
-                        "( "+
-                            "SELECT GROUP_CONCAT(g.name ORDER BY g.name ASC) "+
-                            "FROM ( " +
-                            "SELECT g.name "+
-                            "FROM genres g " +
-                            "INNER JOIN genres_in_movies gm ON g.id = gm.genreId "+
-                            "WHERE gm.movieId = m.id "+
-                            "ORDER BY g.name ASC "+
-                            "LIMIT 3 "+
-                            ") g " +
-                            ") AS genres,"+
-                            "( " +
-                            "    SELECT GROUP_CONCAT(s.name ORDER BY total_movies DESC, s.name ASC)  " +
+                        "( " +
+                            "    SELECT GROUP_CONCAT(g.name ORDER BY g.name ASC) " +
                             "    FROM ( " +
-                            "        SELECT s.name, COUNT(sm.movieId) AS total_movies " +
-                            "        FROM stars s " +
-                            "         INNER JOIN stars_in_movies sm ON s.id = sm.starId " +
-                            "         WHERE sm.movieId = m.id " +
-                            "          GROUP BY s.id "+
-                            "        ORDER BY total_movies DESC, s.name ASC " +
+                            "        SELECT g.name " +
+                            "        FROM genres g " +
+                            "        INNER JOIN genres_in_movies gm ON g.id = gm.genreId " +
+                            "        WHERE gm.movieId = m.id " +
+                            "        ORDER BY g.name ASC " +
                             "        LIMIT 3 " +
-                            "    ) s " +
+                            "    ) g " +
+                            ") AS genres, " +
+                            "( " +
+                            "    SELECT GROUP_CONCAT(star_info.name ORDER BY star_info.total_movies DESC, star_info.name ASC) " +
+                            "    FROM ( " +
+                            "        SELECT s.id, s.name, COUNT(sm.movieId) AS total_movies " +
+                            "        FROM stars s " +
+                            "        INNER JOIN stars_in_movies sm ON s.id = sm.starId " +
+                            "        GROUP BY s.id " +
+                            "        ORDER BY total_movies DESC, s.name ASC " +
+                            "    ) AS star_info " +
+                            "    INNER JOIN stars_in_movies sm ON star_info.id = sm.starId " +
+                            "    WHERE sm.movieId = m.id " +
+                            "    LIMIT 3 " +
                             ") AS stars, " +
                         "IFNULL(AVG(r.rating), 'N/A') AS rating " +
                         "FROM " +
@@ -258,7 +261,30 @@ public class MoviesServlet extends HttpServlet {
                 jsonObject.addProperty("year", rs.getString("year"));
                 jsonObject.addProperty("director", rs.getString("director"));
                 jsonObject.addProperty("genres", rs.getString("genres"));
-                jsonObject.addProperty("stars", rs.getString("stars"));
+
+                String str = rs.getString("stars");
+                System.out.println("starss = " + str); 
+                int count = 0;
+                int index = -1;
+                for (int i = 0; i < str.length(); i++) 
+                {
+                    //System.out.println("charat" + str.charAt(i)); 
+                    if (str.charAt(i) == ',') {
+                        System.out.println("charat"+i); 
+                        count++;
+                        if (count == 3) {
+                            index = i;
+                            break;
+                        }
+                    }
+                }
+
+                System.out.println("index"+index); 
+            
+                if(index==-1) jsonObject.addProperty("stars", rs.getString("stars"));
+                else jsonObject.addProperty("stars", rs.getString("stars").substring(0,index));
+
+                
                 jsonObject.addProperty("rating", rs.getString("rating"));
 
                 jsonArray.add(jsonObject);

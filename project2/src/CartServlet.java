@@ -49,33 +49,53 @@ public class CartServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String title = request.getParameter("title");
         String remove = request.getParameter("remove");
+        String quantityChange = request.getParameter("quantityChange");
         System.out.println(title);
         System.out.println(remove);
+        System.out.println(quantityChange);
+
         HttpSession session = request.getSession();
 
         ArrayList<String> previous_movies = (ArrayList<String>) session.getAttribute("previous_movies");
         
         if(remove!=null && remove.equals("yes"))
         {
-
+            
             synchronized (previous_movies) {
                 previous_movies.removeIf(str -> str.equals(title));
             }
         }
         else
-        {
-
-           
+        { 
             
-            if (previous_movies == null) {
+            if (previous_movies == null) 
+            {
                 previous_movies = new ArrayList<String>();
                 previous_movies.add(title);
                 session.setAttribute("previous_movies", previous_movies);
-            } else {
-                // prevent corrupted states through sharing under multi-threads
-                // will only be executed by one thread at a time
+            } 
+            else 
+            {
+                if(quantityChange!=null)
+                {
+                    if(quantityChange.equals("1"))
+                    {
+                        synchronized (previous_movies) {
+                            previous_movies.add(title);
+                        }
+                    }
+                    else
+                    {
+                        synchronized (previous_movies) {
+                            previous_movies.remove(previous_movies.indexOf(title));
+                        }
+                    }
+                }
+                else
+                {   
                 synchronized (previous_movies) {
                     previous_movies.add(title);
+                }
                 }
             }
         }
