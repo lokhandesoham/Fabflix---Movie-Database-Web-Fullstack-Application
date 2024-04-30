@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Fabflix - Movie Database Web Application
 
 ## Overview
@@ -193,8 +194,11 @@ summary =    158 in 00:01:06 =    2.4/s Avg:  3986 Min:   155 Max: 23411 Err:   
 
 =======
 Video url:- https://youtu.be/N4PuicF4jGY
+=======
+Video url:- https://youtu.be/rmkFwWX18HU
+>>>>>>> ea558a3 (update readme again)
 
-Contributions- Soham Ravindra Lokhande(46816606) – Worked on Login page and set up the Filter Servelt and login redirection. Implemented the Main browsing page and on the html formatting. Worked on the Shopping cart page and the Remove movie button in shopping cart. Made Post request for the credit card information and made the sql query for it and sent the query to database..
+Contributions- Soham Ravindra Lokhande(46816606) – Worked on Login page and set up the Filter Servelt and login redirection. Implemented the Main browsing page and on the html formatting. Worked on the Shopping cart page and the Remove movie button in shopping cart. Made Post request for the credit card information and made the sql query for it and sent the query to database.Made the confirm page and made sales input query.
 
 Swami Sivananda Nanendla(62389275) – Worked on the Movies Page and formulated all the queries required to extract the desired search result. Worked on Single movie and star page and made queries to order them as required. Worked on the Sort by and Pagination and Prev-next button. Recorded the video.
 
