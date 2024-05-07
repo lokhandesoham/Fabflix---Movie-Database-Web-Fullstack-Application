@@ -1,0 +1,93 @@
+/* Basic styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #141414; /* Dark background similar to Netflix */
+    color: #fff; /* White text color */
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    color: #E50914; /* Netflix's red color for main headings */
+    text-align: center;
+    font-size: 28px; /* Larger font size for the main title */
+}
+
+/* Table styling to align with the dark theme */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid #444; /* Darker border for subtlety */
+}
+
+th {
+    background-color: #222; /* Darker background for headers */
+    color: #E50914; /* Red text for headers */
+}
+
+/* Link and button styling */
+a, button {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: #E50914; /* Red background for all buttons and links */
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+a:hover, button:hover {
+    background-color: #f40612; /* Darker red for hover effect */
+}
+
+/* Pagination styling */
+.pagination button {
+    margin: 5px;
+    width: auto; /* Auto width for spacing */
+}
+
+#current_page_display {
+    color: #aaa; /* Light gray for the page indicator */
+    padding-left: 20px;
+}
+
+/* Styling for dropdown filters */
+select {
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #444;
+    padding: 8px;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+/* Specific style adjustments */
+#update_button {
+    margin-top: 20px;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.main-page-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+/* Responsiveness */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+}

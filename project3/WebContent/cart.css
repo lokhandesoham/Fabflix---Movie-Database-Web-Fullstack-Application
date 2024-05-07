@@ -1,0 +1,76 @@
+/* Basic styling for body and headings */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #141414; /* Netflix's dark background */
+    color: #fff; /* White text for readability */
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    color: #E50914; /* Netflix's red color for primary headings */
+    text-align: center;
+}
+
+/* Styling for the table to match Netflix theme */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #333; /* Darker background for table */
+    color: #fff; /* White text for table data */
+}
+
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid #444; /* Slightly lighter border for separation */
+}
+
+th {
+    background-color: #222; /* Even darker shade for headers */
+    color: #E50914; /* Red color for header text */
+}
+
+/* Styling for table rows and the hover effects */
+tbody tr:hover {
+    background-color: #555; /* Lighter background on row hover */
+}
+
+/* Button styling to match Netflix buttons */
+button {
+    background-color: #E50914;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    display: block;
+    margin: 20px auto; /* Center button horizontally */
+    width: 200px; /* Fixed width for better alignment */
+}
+
+button:hover {
+    background-color: #f40612; /* Darker red on hover */
+}
+
+/* Styling for total price display */
+p {
+    text-align: right;
+    color: #ccc; /* Lighter text color for contrast */
+    font-size: 18px;
+}
+
+/* Media query for responsiveness */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    button {
+        width: 100%; /* Full width on smaller screens */
+    }
+}

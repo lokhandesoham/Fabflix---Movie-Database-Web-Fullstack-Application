@@ -1,0 +1,71 @@
+/* General body styles */
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #141414;
+    color: #ffffff;
+    margin: 0;
+    padding: 20px;
+    font-size: 16px;
+}
+
+h1 {
+    color: #E50914;
+}
+
+/* Styles for form and inputs */
+form {
+    background-color: #181818;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    margin: auto;
+}
+
+label {
+    color: #ffffff;
+    margin-bottom: 10px;
+    display: block;
+}
+
+input[type="text"] {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #333;
+    border: none;
+    color: #fff;
+    border-radius: 4px;
+}
+
+input[type="text"]::placeholder {
+    color: #777;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #E50914;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #f40612;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    form {
+        width: 90%;
+    }
+}
+
+/* Additional adjustments for better accessibility */
+input:focus, button:focus {
+    outline: 2px solid #f40612;
+    outline-offset: 2px;
+}
