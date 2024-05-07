@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movies Page</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+
+
+<body>
+    
+    <a href="main.html" class="main-page-button">Main Page</a>
+    
+    <button id="checkout_button">Checkout</button>
+    
+    <h1>Movies List</h1>
+
+    <label for="sort_by">Sort By:</label>
+    <select id="sort_by">
+        <option value="title_asc,rating_asc">title_asc,rating_asc</option>
+        <option value="title_asc,rating_desc">title_asc,rating_desc</option>
+        <option value="title_desc,rating_asc">title_desc,rating_asc</option>
+        <option value="title_desc,rating_desc">title_desc,rating_desc</option>
+        <option value="rating_asc,title_asc">rating_asc,title_asc</option>
+        <option value="rating_asc,title_desc">rating_asc,title_desc</option>
+        <option value="rating_desc,title_asc">rating_desc,title_asc</option>
+        <option value="rating_desc,title_desc">rating_desc,title_desc</option>
+    </select>
+
+    <label for="movies_per_page">Movies Per Page:</label>
+    <select id="movies_per_page">
+        <option value="10">10</option>
+        <option value="25">25</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+    </select>
+
+    <button id="update_button">Update</button>
+
+
+    <!-- Table to display movies -->
+    <table id="movies_table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Year</th>
+                <th>Director</th>
+                <th>Genres</th>
+                <th>Stars</th>
+                <th>Rating</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="movie_table_body">
+            <!-- Movies will be dynamically added here -->
+        </tbody>
+    </table>
+
+    <div class="pagination">
+        <button id="prev_button">Prev</button>
+        <button id="next_button">Next</button>
+    </div>
+
+    <span id="current_page_display">Page 1</span>
+
+    <!-- Include jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script src='https://code.jquery.com/jquery-3.1.0.min.js'></script>
+    <script type='text/javascript' src='movies.js'></script>
+</body>
+</html>
