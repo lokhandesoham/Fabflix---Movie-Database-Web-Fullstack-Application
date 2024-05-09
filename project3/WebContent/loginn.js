@@ -1,5 +1,14 @@
 let login_form = $("#login_form");
 
+let recaptchaWidgetId;
+
+function onRecaptchaLoad() {
+    recaptchaWidgetId = grecaptcha.render('recaptcha-container', {
+        'sitekey' : '6Le3i9UpAAAAACWv0e1HMS5JMLJwtsu31iCUUua8'
+    });
+}
+
+
 /**
  * Handle the data returned by LoginServlet
  * @param resultDataString jsonObject
@@ -22,6 +31,8 @@ function handleLoginResult(resultDataJson) {
         console.log("show error message");
         console.log(resultDataJson["message"]);
         $("#login_error_message").text(resultDataJson["message"]);
+        grecaptcha.reset(recaptchaWidgetId);
+        
     }
 }
 

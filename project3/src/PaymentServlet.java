@@ -168,12 +168,18 @@ public class PaymentServlet extends HttpServlet {
         {
                 Connection conn = dataSource.getConnection();
                 System.out.println("DB connected"); 
-                Statement statement = conn.createStatement();
+                //Statement statement = conn.createStatement();
 
-                String query = "SELECT * FROM creditcards WHERE firstName = '" +firstName+"' AND lastName = '"+lastName+"' AND id = '"+creditCardNumber+"' AND expiration = '"+expirationDate+"' ";
+                //String query = "SELECT * FROM creditcards WHERE firstName = '" +firstName+"' AND lastName = '"+lastName+"' AND id = '"+creditCardNumber+"' AND expiration = '"+expirationDate+"' ";
+                String query = "SELECT * FROM creditcards WHERE firstName = ? AND lastName = ? AND id = ? AND expiration = ?";
                 
+                PreparedStatement statement = conn.prepareStatement(query);
+                statement.setString(1, firstName);
+                statement.setString(2, lastName);
+                statement.setString(3, creditCardNumber);
+                statement.setString(4, expirationDate);
 
-                ResultSet rs = statement.executeQuery(query);
+                ResultSet rs = statement.executeQuery();
 
                 
 
@@ -186,8 +192,12 @@ public class PaymentServlet extends HttpServlet {
                         int custId = -1;
                         try
                         {
-                            String q1 = "SELECT id FROM movies WHERE title = '"+movieList.get(i)+"' ";
-                            ResultSet resultSet = statement.executeQuery(q1);
+                            //String q1 = "SELECT id FROM movies WHERE title = '"+movieList.get(i)+"' ";
+                            String q1 = "SELECT id FROM movies WHERE title = ?";
+
+                            PreparedStatement statement1 = conn.prepareStatement(q1);
+                            statement1.setString(1, movieList.get(i));
+                            ResultSet resultSet = statement1.executeQuery();
                             if (resultSet.next()) {
                                 movieId = resultSet.getString("id");
                             }
@@ -198,8 +208,13 @@ public class PaymentServlet extends HttpServlet {
 
                         try
                         {
-                            String q2 = "SELECT id FROM customers WHERE email = '"+emailid+"' ";
-                            ResultSet resultSet = statement.executeQuery(q2);
+                            //String q2 = "SELECT id FROM customers WHERE email = '"+emailid+"' ";
+                            String q2 = "SELECT id FROM customers WHERE email = ?";
+
+                            PreparedStatement statement2 = conn.prepareStatement(q2);
+                            statement2.setString(1, emailid);
+
+                            ResultSet resultSet = statement2.executeQuery();
                             if (resultSet.next()) {
                                 custId = resultSet.getInt("id");
                             }
@@ -214,17 +229,30 @@ public class PaymentServlet extends HttpServlet {
                         {
                             try 
                             {   
-                                String q3 = "INSERT INTO sales (customerId, movieId, saleDate, quantity) VALUES ( "+custId+" , '"+movieId+"' , '"+date+"' , "+countList.get(i)+" );";
+                                //String q3 = "INSERT INTO sales (customerId, movieId, saleDate, quantity) VALUES ( "+custId+" , '"+movieId+"' , '"+date+"' , "+countList.get(i)+" );";
+                                String q3 = "INSERT INTO sales (customerId, movieId, saleDate, quantity) VALUES (?, ?, ?, ?)";
+                                PreparedStatement statement3 = conn.prepareStatement(q3, Statement.RETURN_GENERATED_KEYS);
+                                statement3.setInt(1, custId);
+                                statement3.setString(2, movieId);
+                                statement3.setString(3, date);
+                                statement3.setInt(4, countList.get(i));
+
                                 int saleid=-1;
-                                int rowsAffected = statement.executeUpdate(q3);
+                                int rowsAffected = statement3.executeUpdate();
                                 if (rowsAffected <= 0) {
                                     System.out.println("Failed to add to sales");
                                 }
                                 else
                                 {
                                     
-                                    String q4 = "SELECT id FROM sales WHERE customerId = "+custId+" AND movieId = '"+movieId+"' AND DATE_FORMAT(saleDate, '%Y/%m/%d') = '"+date+"' ";
-                                    ResultSet resultSet = statement.executeQuery(q4);
+                                    //String q4 = "SELECT id FROM sales WHERE customerId = "+custId+" AND movieId = '"+movieId+"' AND DATE_FORMAT(saleDate, '%Y/%m/%d') = '"+date+"' ";
+                                    String q4 = "SELECT id FROM sales WHERE customerId = ? AND movieId = ? AND DATE_FORMAT(saleDate, '%Y/%m/%d') = ?";
+                                    PreparedStatement statement4 = conn.prepareStatement(q4);
+                                    statement4.setInt(1, custId);
+                                    statement4.setString(2, movieId);
+                                    statement4.setString(3, date);
+
+                                    ResultSet resultSet = statement4.executeQuery();
                                     if (resultSet.next()) {
                                         saleid = resultSet.getInt("id");
                                     } 
