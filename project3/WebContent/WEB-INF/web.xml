@@ -7,6 +7,16 @@
         <welcome-file>login.html</welcome-file>
     </welcome-file-list>
 
+    <servlet>
+        <servlet-name>RedirectServlet</servlet-name>
+        <servlet-class>com.example.servlets.RedirectServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>RedirectServlet</servlet-name>
+        <url-pattern>/project3/_dashboard</url-pattern> <!-- Customize this URL pattern -->
+    </servlet-mapping>
+
 
     <!-- Register the DataSource which defined in META-INF/context.xml-->
     <resource-ref>

@@ -28,6 +28,14 @@ public class LoginFilter implements Filter {
             chain.doFilter(request, response);
             return;
         }
+        
+        System.out.println("request from --> "+httpRequest.getRequestURI());
+
+        
+        if (httpRequest.getRequestURI().equals("/project3/_dashboard")) {
+            httpResponse.sendRedirect("emplogin.html");
+            return;
+        }
 
         // Redirect to login page if the "user" attribute doesn't exist in session
         if (httpRequest.getSession().getAttribute("user") == null) {
@@ -50,6 +58,11 @@ public class LoginFilter implements Filter {
         allowedURIs.add("login.html");
         allowedURIs.add("loginn.js");
         allowedURIs.add("login");
+        allowedURIs.add("emplogin.html");
+        allowedURIs.add("emplogin.js");
+        // allowedURIs.add("dashboard.html");
+        // allowedURIs.add("_dashboard");
+
     }
 
     public void destroy() {
