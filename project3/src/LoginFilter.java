@@ -60,6 +60,7 @@ public class LoginFilter implements Filter {
         allowedURIs.add("login");
         allowedURIs.add("emplogin.html");
         allowedURIs.add("emplogin.js");
+        allowedURIs.add("emplogin");
         // allowedURIs.add("dashboard.html");
         // allowedURIs.add("_dashboard");
 
