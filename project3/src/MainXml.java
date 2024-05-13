@@ -48,6 +48,7 @@ public class MainXml extends DefaultHandler
 
             //parse the file and also register this class for call backs
             sp.parse("/home/ubuntu/stanford-movies/mains243.xml", this);
+            // sp.parse("stanford-movies/mains243.xml", this);
 
         } catch (SAXException se) {
             se.printStackTrace();

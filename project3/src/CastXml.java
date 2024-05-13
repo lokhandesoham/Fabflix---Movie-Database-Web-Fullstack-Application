@@ -51,6 +51,7 @@ public class CastXml extends DefaultHandler {
 
 			// parse the file and also register this class for call backs
 			sp.parse("/home/ubuntu/stanford-movies/casts124.xml", this);
+			// sp.parse("stanford-movies/casts124.xml", this);
 
 		} catch (SAXException se) {
 			se.printStackTrace();
