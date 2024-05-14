@@ -335,7 +335,6 @@ public class MoviesServlet extends HttpServlet {
                 int count = 0;
                 int index = -1;
                 
-                
                 for (int i = 0; i < str.length(); i++) 
                 {
                     //System.out.println("charat" + str.charAt(i)); 
