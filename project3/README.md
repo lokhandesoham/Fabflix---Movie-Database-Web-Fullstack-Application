@@ -30,7 +30,7 @@ Stored procedures- We used stored procedure and called them in batch_insert for 
 
 Inconsistent report -
 
-In actors63.xml - at actor <stagename>Diahnne Abbott dob is missing/not an integer at <dob>
+"In actors63.xml - at actor <stagename>Diahnne Abbott dob is missing/not an integer at <dob>
 In actors63.xml - at actor <stagename>Kareem AbdulJabbar dob is missing/not an integer at <dob>
 In actors63.xml - at actor <stagename>F.Murray Abraham dob is missing/not an integer at <dob>
 In actors63.xml - at actor <stagename>James Abrahams dob is missing/not an integer at <dob>
@@ -2597,5 +2597,5 @@ In main243.xml - at actor <film><fid>MJu15 <year>19yy year is not an integer
 
 In casts124.xml - at  <m><f>ClC18 <a> star name is missing
 In casts124.xml - at  <m><f>DMl10 <a> star name is missing
-In casts124.xml - at  <m><f>H65 <a> star name is missin
+In casts124.xml - at  <m><f>H65 <a> star name is missin" 
 
