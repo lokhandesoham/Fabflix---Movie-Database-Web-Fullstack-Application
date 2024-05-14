@@ -1,6 +1,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Fabflix - Movie Database Web Application
 
 ## Overview
@@ -201,6 +202,9 @@ Video url:- https://youtu.be/rmkFwWX18HU
 =======
 Video url:- https://youtu.be/my5R8KCekME
 >>>>>>> d963760 (updated readme)
+=======
+Video url:- https://youtu.be/XLGO_DZm-0w
+>>>>>>> ec1d934 (added  video link)
 
 Contributions-
 Soham Ravindra Lokhande(46816606) –  Worked on adding reCAPTCHA and HTTPS. Worked on Employees Dashboard, add movie and reCAPTCHA. Worked on parsing, actors and cast xml. Came up with the stored procedure and One optimization technique -batch_insert
