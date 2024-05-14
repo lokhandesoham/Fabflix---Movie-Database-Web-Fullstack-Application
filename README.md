@@ -2756,50 +2756,50 @@ In actors63.xml - at actor stagename>Daphne Zuniga dob is missing/not an integer
 In actors63.xml - at actor stagename>Frantisek Zvarik dob is missing/not an integer at dob>
 In actors63.xml - at actor stagename>Darrell Zwerling dob is missing/not an integer at dob>
 
-In mains243.xml - at actor <film><fid>CGl44 director is missing
-In mains243.xml - at actor <film><fid>LwS150 director is missing
-In main243.xml - at actor <film><fid>LB9 <year>19yy year is not an integer
-In mains243.xml - at actor <film><fid>GC28 director is missing
-In mains243.xml - at actor <film><fid>GMe10 director is missing
-In mains243.xml - at actor <film><fid>SSS15 director is missing
-In mains243.xml - at actor <film><fid>SSS20 director is missing
-In mains243.xml - at actor <film><fid>SSS25 director is missing
-In mains243.xml - at actor <film><fid>SSS50 director is missing
-In mains243.xml - at actor <film><fid>ChJ60 director is missing
-In mains243.xml - at actor <film><fid>BaD16 director is missing
-In mains243.xml - at actor <film><fid>JD7 title is missing 
-In main243.xml - at actor <film><fid>WS45 <year>19yy year is not an integer
-In mains243.xml - at actor <film><fid>WlJ10 title is missing 
-In main243.xml - at actor <film><fid>AS22 <year>199x year is not an integer
-In main243.xml - at actor <film><fid>AS32 <year>199x year is not an integer
-In mains243.xml - at actor <film><fid>GeP45 title is missing 
-In mains243.xml - at actor <film><fid>SS4 genre is missing
-In mains243.xml - at actor <film><fid>DPo2 genre is missing
-In mains243.xml - at actor <film><fid>DPo4 genre is missing
-In mains243.xml - at actor <film><fid>GxR10 title is missing 
-In mains243.xml - at actor <film><fid>GxR10 title is missing 
-In main243.xml - at actor <film><fid>RHd2 <year>199x year is not an integer
-In mains243.xml - at actor <film><fid>Z6510 director is missing
-In main243.xml - at actor <film><fid>IAv12 <year>199x year is not an integer
-In main243.xml - at actor <film><fid>MS0 <year>196x year is not an integer
-In main243.xml - at actor <film><fid>MS36 <year>2001  year is not an integer
-In main243.xml - at actor <film><fid>WiW30 <year>19yy year is not an integer
-In main243.xml - at actor <film><fid>DLy25 <year>19yy year is not an integer
-In main243.xml - at actor <film><fid>AEy13 <year>19yy year is not an integer
-In mains243.xml - at actor <film><fid>BSi3 title is missing 
-In main243.xml - at actor <film><fid>CsS15 <year>199x year is not an integer
-In mains243.xml - at actor <film><fid>KDo1x title is missing 
-In main243.xml - at actor <film><fid>KDo1x <year>199x year is not an integer
-In mains243.xml - at actor <film><fid>KDo1x director is missing
-In main243.xml - at actor <film><fid>TdC13 <year>19yy year is not an integer
-In main243.xml - at actor <film><fid>Z9590 <year>19yy year is not an integer
-In main243.xml - at actor <film><fid>AbK15 <year>19yy year is not an integer
-In main243.xml - at actor <film><fid>MkJ11 <year>1997  year is not an integer
-In main243.xml - at actor <film><fid>MJu15 <year>19yy year is not an integer
+In mains243.xml - at actor film>fid>CGl44 director is missing
+In mains243.xml - at actor film>fid>LwS150 director is missing
+In main243.xml - at actor film>fid>LB9 year>19yy year is not an integer
+In mains243.xml - at actor film>fid>GC28 director is missing
+In mains243.xml - at actor film>fid>GMe10 director is missing
+In mains243.xml - at actor film>fid>SSS15 director is missing
+In mains243.xml - at actor film>fid>SSS20 director is missing
+In mains243.xml - at actor film>fid>SSS25 director is missing
+In mains243.xml - at actor film>fid>SSS50 director is missing
+In mains243.xml - at actor film>fid>ChJ60 director is missing
+In mains243.xml - at actor film>fid>BaD16 director is missing
+In mains243.xml - at actor film>fid>JD7 title is missing 
+In main243.xml - at actor film>fid>WS45 year>19yy year is not an integer
+In mains243.xml - at actor film>fid>WlJ10 title is missing 
+In main243.xml - at actor film>fid>AS22 year>199x year is not an integer
+In main243.xml - at actor film>fid>AS32 year>199x year is not an integer
+In mains243.xml - at actor film>fid>GeP45 title is missing 
+In mains243.xml - at actor film>fid>SS4 genre is missing
+In mains243.xml - at actor film>fid>DPo2 genre is missing
+In mains243.xml - at actor film>fid>DPo4 genre is missing
+In mains243.xml - at actor film>fid>GxR10 title is missing 
+In mains243.xml - at actor film>fid>GxR10 title is missing 
+In main243.xml - at actor film>fid>RHd2 year>199x year is not an integer
+In mains243.xml - at actor film>fid>Z6510 director is missing
+In main243.xml - at actor film>fid>IAv12 year>199x year is not an integer
+In main243.xml - at actor film>fid>MS0 year>196x year is not an integer
+In main243.xml - at actor film>fid>MS36 year>2001  year is not an integer
+In main243.xml - at actor film>fid>WiW30 year>19yy year is not an integer
+In main243.xml - at actor film>fid>DLy25 year>19yy year is not an integer
+In main243.xml - at actor film>fid>AEy13 year>19yy year is not an integer
+In mains243.xml - at actor film>fid>BSi3 title is missing 
+In main243.xml - at actor film>fid>CsS15 year>199x year is not an integer
+In mains243.xml - at actor film>fid>KDo1x title is missing 
+In main243.xml - at actor film>fid>KDo1x year>199x year is not an integer
+In mains243.xml - at actor film>fid>KDo1x director is missing
+In main243.xml - at actor film>fid>TdC13 year>19yy year is not an integer
+In main243.xml - at actor film>fid>Z9590 year>19yy year is not an integer
+In main243.xml - at actor film>fid>AbK15 year>19yy year is not an integer
+In main243.xml - at actor film>fid>MkJ11 year>1997  year is not an integer
+In main243.xml - at actor film>fid>MJu15 year>19yy year is not an integer
 
-In casts124.xml - at  <m><f>ClC18 <a> star name is missing
-In casts124.xml - at  <m><f>DMl10 <a> star name is missing
-In casts124.xml - at  <m><f>H65 <a> star name is missin
+In casts124.xml - at  m>f>ClC18 a> star name is missing
+In casts124.xml - at  m>f>DMl10 a> star name is missing
+In casts124.xml - at  m>f>H65 a> star name is missin
 
 <<<<<<< HEAD
             if(year!= null && !year.equals("")) query +="(m.year = " + year + ") AND ";
