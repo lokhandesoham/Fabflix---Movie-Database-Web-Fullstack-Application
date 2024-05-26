@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <a href="search.html" id="search-link">Search Page</a>
+
+    <button id="checkout_button">Checkout</button>
+    
+    <h1>Welcome to the Main Page</h1>
+
+    <!-- Search Form -->
+    <form id="search_form"  method="GET">
+        <label>Title:</label>
+        <input type="text" id="title" name="title">
+        <br>
+        <label>Year:</label>
+        <input type="text" id="year" name="year">
+        <br>
+        <label>Director:</label>
+        <input type="text" id="director" name="director">
+        <br>
+        <label>Star:</label>
+        <input type="text" id="star" name="star">
+        <br>
+        <button type="submit">Search</button>
+    </form>
+
+    <hr>
+
+    <!-- Genre Links -->
+    <h2>Browse by Genre</h2>
+    <ul id="genres_list"></ul>
+
+
+    <hr>
+
+    <!-- Title Links -->
+    <h2>Browse by Title</h2>
+    <ul>
+        <li><a href="movies.html?title=*">*</a></li>
+        <li><a href="movies.html?title=0">0</a></li>
+        <li><a href="movies.html?title=1">1</a></li>
+        <li><a href="movies.html?title=2">2</a></li>
+        <li><a href="movies.html?title=3">3</a></li>
+        <li><a href="movies.html?title=4">4</a></li>
+        <li><a href="movies.html?title=5">5</a></li>
+        <li><a href="movies.html?title=6">6</a></li>
+        <li><a href="movies.html?title=7">7</a></li>
+        <li><a href="movies.html?title=8">8</a></li>
+        <li><a href="movies.html?title=9">9</a></li>
+        <li><a href="movies.html?title=A">A</a></li>
+        <li><a href="movies.html?title=B">B</a></li>
+        <li><a href="movies.html?title=C">C</a></li>
+        <li><a href="movies.html?title=D">D</a></li>
+        <li><a href="movies.html?title=E">E</a></li>
+        <li><a href="movies.html?title=F">F</a></li>
+        <li><a href="movies.html?title=G">G</a></li>
+        <li><a href="movies.html?title=H">H</a></li>
+        <li><a href="movies.html?title=I">I</a></li>
+        <li><a href="movies.html?title=J">J</a></li>
+        <li><a href="movies.html?title=K">K</a></li>
+        <li><a href="movies.html?title=L">L</a></li>
+        <li><a href="movies.html?title=M">M</a></li>
+        <li><a href="movies.html?title=N">N</a></li>
+        <li><a href="movies.html?title=O">O</a></li>
+        <li><a href="movies.html?title=P">P</a></li>
+        <li><a href="movies.html?title=Q">Q</a></li>
+        <li><a href="movies.html?title=R">R</a></li>
+        <li><a href="movies.html?title=S">S</a></li>
+        <li><a href="movies.html?title=T">T</a></li>
+        <li><a href="movies.html?title=U">U</a></li>
+        <li><a href="movies.html?title=V">V</a></li>
+        <li><a href="movies.html?title=W">W</a></li>
+        <li><a href="movies.html?title=X">X</a></li>
+        <li><a href="movies.html?title=Y">Y</a></li>
+        <li><a href="movies.html?title=Z">Z</a></li>
+        <!-- Add more title links as needed -->
+    </ul>
+
+    <!-- Include jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- Include main.js for JavaScript functionality -->
+    <script src='https://code.jquery.com/jquery-3.1.0.min.js'></script>
+    <script type='text/javascript' src='main.js'></script>
+
+</body>
+</html>

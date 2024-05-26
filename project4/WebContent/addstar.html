@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Star</title>
+</head>
+<body>
+    <div>
+        <button onclick="window.location.href='dashboard.html'">Home</button>
+        <button onclick="window.location.href='addmovie.html'">Add a Movie</button>
+        <button onclick="window.location.href='main.html'">Browse Movies</button>
+    </div>
+    <h1>Add Star</h1>
+    <form id="addStarForm">
+        <label for="starName">Star Name:</label>
+        <input type="text" id="starName" name="starName" required>
+        <br><br>
+        <label for="birthYear">Birth Year:</label>
+        <input type="text" id="birthYear" name="birthYear">
+        <br><br>
+        <input type="submit" value="Add Star">
+    </form>
+
+    <div id="added_message"></div> 
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src='https://code.jquery.com/jquery-3.1.0.min.js'></script>
+    <script type='text/javascript' src='addstar.js'></script>
+</body>
+</html>
