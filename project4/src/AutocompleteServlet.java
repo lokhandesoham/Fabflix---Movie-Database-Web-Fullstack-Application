@@ -17,53 +17,14 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.util.HashMap;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 @WebServlet(name = "AutocompleteServlet", urlPatterns = "/hero-suggestion")
 public class AutocompleteServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private DataSource dataSource;
 
-    public static HashMap<Integer, String> superHeroMap = new HashMap<>();
-	
-	static {
-		superHeroMap.put(1, "Blade");
-		superHeroMap.put(2, "Ghost Rider");
-		superHeroMap.put(3, "Luke Cage");
-		superHeroMap.put(4, "Silver Surfer");
-		superHeroMap.put(5, "Beast");
-		superHeroMap.put(6, "Thing");
-		superHeroMap.put(7, "Black Panther");
-		superHeroMap.put(8, "Invisible Woman");
-		superHeroMap.put(9, "Nick Fury");
-		superHeroMap.put(10, "Storm");
-		superHeroMap.put(11, "Iron Man");
-		superHeroMap.put(12, "Professor X");
-		superHeroMap.put(13, "Hulk");
-		superHeroMap.put(14, "Cyclops");
-		superHeroMap.put(15, "Thor");
-		superHeroMap.put(16, "Jean Grey");
-		superHeroMap.put(17, "Wolverine");
-		superHeroMap.put(18, "Daredevil");
-		superHeroMap.put(19, "Captain America");
-		superHeroMap.put(20, "Spider-Man");
-		superHeroMap.put(101, "Superman");
-		superHeroMap.put(102, "Batman");
-		superHeroMap.put(103, "Wonder Woman");
-		superHeroMap.put(104, "Flash");
-		superHeroMap.put(105, "Green Lantern");
-		superHeroMap.put(106, "Catwoman");
-		superHeroMap.put(107, "Nightwing");
-		superHeroMap.put(108, "Captain Marvel");
-		superHeroMap.put(109, "Aquaman");
-		superHeroMap.put(110, "Green Arrow");
-		superHeroMap.put(111, "Martian Manhunter");
-		superHeroMap.put(112, "Batgirl");
-		superHeroMap.put(113, "Supergirl");
-		superHeroMap.put(114, "Black Canary");
-		superHeroMap.put(115, "Hawkgirl");
-		superHeroMap.put(116, "Cyborg");
-		superHeroMap.put(117, "Robin");
-	}
 
     public void init(ServletConfig config) {
         try {
@@ -104,7 +65,6 @@ public class AutocompleteServlet extends HttpServlet {
 
         System.out.println("Received query: " + search); 
 
-        String query;
 		try {
 
             Connection conn = dataSource.getConnection();
@@ -113,50 +73,37 @@ public class AutocompleteServlet extends HttpServlet {
 
             PreparedStatement statement = null;
 
-            List<String> wordsList = new ArrayList<>();
+            //String search = "good u sp"; // Example search string
+            String[] keywords = search.split("\\s+");
 
-            query = "SELECT " +
-                    "m.id, " +
-                    "m.title, " +
-                    "m.year, " +
-                    "m.director, " +
-                    "( " +
-                    "    SELECT GROUP_CONCAT(g.name ORDER BY g.name ASC) " +
-                    "    FROM ( " +
-                    "        SELECT g.name " +
-                    "        FROM genres g " +
-                    "        INNER JOIN genres_in_movies gm ON g.id = gm.genreId " +
-                    "        WHERE gm.movieId = m.id " +
-                    "        ORDER BY g.name ASC " +
-                    "        LIMIT 3 " +
-                    "    ) g " +
-                    ") AS genres, " +
-                    "( " +
-                    "    SELECT GROUP_CONCAT(star_info.name ORDER BY star_info.total_movies DESC, star_info.name ASC) " +
-                    "    FROM ( " +
-                    "        SELECT s.id, s.name, COUNT(sm.movieId) AS total_movies " +
-                    "        FROM stars s " +
-                    "        INNER JOIN stars_in_movies sm ON s.id = sm.starId " +
-                    "        GROUP BY s.id " +
-                    "        ORDER BY total_movies DESC, s.name ASC " +
-                    "    ) AS star_info " +
-                    "    INNER JOIN stars_in_movies sm ON star_info.id = sm.starId " +
-                    "    WHERE sm.movieId = m.id " +
-                    "    LIMIT 3 " +
-                    ") AS stars, " +
-                    "ROUND(AVG(r.rating), 1) AS rating " +
+            // Build the WHERE clause dynamically
+            String whereClause = Arrays.stream(keywords)
+                    .map(keyword -> " (m.title LIKE ? OR m.title LIKE ?) ")
+                    .collect(Collectors.joining(" AND "));
+
+            // Construct the SQL query
+            String query = "SELECT " +
+                    "m.title " +
                     "FROM " +
                     "movies m " +
                     "LEFT JOIN " +
                     "ratings r ON m.id = r.movieId " +
-                    "WHERE " +
-                    "m.title LIKE '% s%' " +
-                    "AND m.title LIKE '% lov%' " +
+                    "WHERE " + whereClause + " " +
                     "GROUP BY " +
                     "m.id " +
-                    "ORDER BY m.title ASC LIMIT 10";
+                    "ORDER BY " +
+                    "m.title ASC " +
+                    "LIMIT 10 OFFSET 0";
 
             statement = conn.prepareStatement(query);
+
+            int paramIndex = 1;
+            for (String keyword : keywords) {
+                statement.setString(paramIndex++, "% " + keyword + "%");
+                statement.setString(paramIndex++, keyword + "%");
+            }
+            System.out.println("Executing query: " + statement.toString());
+
             ResultSet rs = statement.executeQuery();
 
 

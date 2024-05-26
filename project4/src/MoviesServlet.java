@@ -17,6 +17,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
+import java.util.stream.Collectors;
 
 @WebServlet(name = "MoviesServlet", urlPatterns = "/movies")
 public class MoviesServlet extends HttpServlet {
@@ -60,6 +61,7 @@ public class MoviesServlet extends HttpServlet {
         
         String query;
         int parameterIndex=1;
+        String[] keywords;
         try  {
             Connection conn = dataSource.getConnection();
             System.out.println("DB connected"); 
@@ -68,6 +70,7 @@ public class MoviesServlet extends HttpServlet {
             PreparedStatement statement = null;
 
             List<String> wordsList = new ArrayList<>();
+            
 
             if(genre!= null && !genre.equals(""))
             {
@@ -122,49 +125,55 @@ public class MoviesServlet extends HttpServlet {
             }
             else if (fulltitle!= null && !fulltitle.equals(""))
             {
-                System.out.println("In fulltitle query"); 
-                String[] wordsArray = fulltitle.split(" ");
-                wordsList = Arrays.asList(wordsArray);
-                System.out.println("fulltitle list: "+ wordsList); 
+                //String search = "good u sp"; // Example search string
+                keywords = fulltitle.split("\\s+");
+
+                // Build the WHERE clause dynamically
+                String whereClause = Arrays.stream(keywords)
+                        .map(keyword -> " (m.title LIKE ? OR m.title LIKE ?) ")
+                        .collect(Collectors.joining(" AND "));
+
+                // Print the WHERE clause to see its structure
+                System.out.println("WHERE Clause: " + whereClause);
+
+                // Construct the SQL query
                 query = "SELECT " +
-                    "m.id, " +
-                    "m.title, " +
-                    "m.year, " +
-                    "m.director, " +
-                    "( " +
-                    "    SELECT GROUP_CONCAT(g.name ORDER BY g.name ASC) " +
-                    "    FROM ( " +
-                    "        SELECT g.name " +
-                    "        FROM genres g " +
-                    "        INNER JOIN genres_in_movies gm ON g.id = gm.genreId " +
-                    "        WHERE gm.movieId = m.id " +
-                    "        ORDER BY g.name ASC " +
-                    "        LIMIT 3 " +
-                    "    ) g " +
-                    ") AS genres, " +
-                    "( " +
-                    "    SELECT GROUP_CONCAT(star_info.name ORDER BY star_info.total_movies DESC, star_info.name ASC) " +
-                    "    FROM ( " +
-                    "        SELECT s.id, s.name, COUNT(sm.movieId) AS total_movies " +
-                    "        FROM stars s " +
-                    "        INNER JOIN stars_in_movies sm ON s.id = sm.starId " +
-                    "        GROUP BY s.id " +
-                    "        ORDER BY total_movies DESC, s.name ASC " +
-                    "    ) AS star_info " +
-                    "    INNER JOIN stars_in_movies sm ON star_info.id = sm.starId " +
-                    "    WHERE sm.movieId = m.id " +
-                    "    LIMIT 3 " +
-                    ") AS stars, " +
-                    "ROUND(AVG(r.rating), 1) AS rating " +
-                    "FROM " +
-                    "movies m " +
-                    "LEFT JOIN " +
-                    "ratings r ON m.id = r.movieId " +
-                    "WHERE " +
-                    "m.title LIKE ? " +
-                    "AND m.title LIKE ? " +
-                    "GROUP BY " +
-                    "m.id ";
+                        "m.id, " +
+                        "m.title, " +
+                        "m.year, " +
+                        "m.director, " +
+                        "( " +
+                        "    SELECT GROUP_CONCAT(g.name ORDER BY g.name ASC) " +
+                        "    FROM ( " +
+                        "        SELECT g.name " +
+                        "        FROM genres g " +
+                        "        INNER JOIN genres_in_movies gm ON g.id = gm.genreId " +
+                        "        WHERE gm.movieId = m.id " +
+                        "        ORDER BY g.name ASC " +
+                        "        LIMIT 3 " +
+                        "    ) g " +
+                        ") AS genres, " +
+                        "( " +
+                        "    SELECT GROUP_CONCAT(star_info.name ORDER BY star_info.total_movies DESC, star_info.name ASC) " +
+                        "    FROM ( " +
+                        "        SELECT s.id, s.name, COUNT(sm.movieId) AS total_movies " +
+                        "        FROM stars s " +
+                        "        INNER JOIN stars_in_movies sm ON s.id = sm.starId " +
+                        "        GROUP BY s.id " +
+                        "        ORDER BY total_movies DESC, s.name ASC " +
+                        "    ) AS star_info " +
+                        "    INNER JOIN stars_in_movies sm ON star_info.id = sm.starId " +
+                        "    WHERE sm.movieId = m.id " +
+                        "    LIMIT 3 " +
+                        ") AS stars, " +
+                        "ROUND(AVG(r.rating), 1) AS rating " +
+                        "FROM " +
+                        "movies m " +
+                        "LEFT JOIN " +
+                        "ratings r ON m.id = r.movieId " +
+                        "WHERE " + whereClause + " " +
+                        "GROUP BY " +
+                        "m.id ";
             }
             else if( (title!= null && !title.equals("")) && (genre== null || genre.equals("")) && (year== null || year.equals("")) && (director== null || director.equals("")) && (star== null || star.equals("")))
             {
@@ -343,6 +352,14 @@ public class MoviesServlet extends HttpServlet {
             statement = conn.prepareStatement(query);
             if(genre!= null && !genre.equals("")){
                 statement.setString(parameterIndex++, genre);
+            }
+            else if (fulltitle!= null && !fulltitle.equals(""))
+            {
+                keywords = fulltitle.split("\\s+");
+                for (String keyword : keywords) {
+                statement.setString(parameterIndex++, "% " + keyword + "%");
+                statement.setString(parameterIndex++, keyword + "%");
+                }
             }
             else if( (title!= null && !title.equals("")) && (genre== null || genre.equals("")) && (year== null || year.equals("")) && (director== null || director.equals("")) && (star== null || star.equals(""))){
                 statement.setString(parameterIndex++, "%" + title + "%");
