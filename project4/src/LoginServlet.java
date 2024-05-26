@@ -14,6 +14,7 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import javax.annotation.Resource;
 import java.sql.PreparedStatement;
 import org.jasypt.util.password.StrongPasswordEncryptor;
 
@@ -24,6 +25,8 @@ public class LoginServlet extends HttpServlet {
      */
 
     private static final long serialVersionUID = 1L;
+
+    @Resource(name = "jdbc/MasterDB")
     private DataSource dataSource;
 
 
