@@ -8,9 +8,9 @@
     - #### Instruction of deployment:
     AWS load balancer can be directly accessed at - http://54.176.145.40/project4/
 
-    Master Instance - Public - 13.57.203.17  Private- 172.31.11.15 Tomacat - http://13.57.203.17:8080/manager/html
+    Master Instance - Public - 13.57.203.17  Private- 172.31.11.15 Tomacat - http://13.57.203.17:8080/project4/
 
-    Slave Instance - Public - 54.193.4.214  Private- 172.31.14.0 Tomcat - http://54.193.4.214:8080/manager/html
+    Slave Instance - Public - 54.193.4.214  Private- 172.31.14.0 Tomcat - http://54.193.4.214:8080/project4/
 
     Once u click on AWS load balancer it automatically redirect traffic on port 80 to the above Master/Slave AWS instances
 
