@@ -1,6 +1,8 @@
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import jakarta.servlet.ServletConfig;
@@ -12,6 +14,7 @@ import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import javax.naming.Context;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.annotation.Resource;
@@ -26,7 +29,7 @@ public class LoginServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
-    @Resource(name = "jdbc/MasterDB")
+    // @Resource(name = "jdbc/SlaveDB")
     private DataSource dataSource;
 
 
@@ -38,7 +41,11 @@ public class LoginServlet extends HttpServlet {
 
     public void init(ServletConfig config) {
         try {
-            dataSource = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/moviedb");
+            // dataSource = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/moviedb");
+            Context initCtx = new InitialContext();
+            Context envCtx = (Context) initCtx.lookup("java:comp/env");
+            dataSource = (DataSource) envCtx.lookup("jdbc/SlaveDB"); //  the slave resource
+                
         } catch (NamingException e) {
             e.printStackTrace();
         }

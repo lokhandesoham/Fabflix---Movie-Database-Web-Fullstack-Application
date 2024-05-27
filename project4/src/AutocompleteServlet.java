@@ -2,6 +2,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.List;
+import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import jakarta.servlet.ServletConfig;
@@ -28,7 +29,10 @@ public class AutocompleteServlet extends HttpServlet {
 
     public void init(ServletConfig config) {
         try {
-            dataSource = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/moviedb");
+            //dataSource = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/moviedb");
+            Context initCtx = new InitialContext();
+            Context envCtx = (Context) initCtx.lookup("java:comp/env");
+            dataSource = (DataSource) envCtx.lookup("jdbc/SlaveDB"); //  the slave resource
         } catch (NamingException e) {
             e.printStackTrace();
         }

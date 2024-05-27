@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import javax.naming.Context;
 import java.sql.Statement;
 
 @WebServlet(name = "SingleStarServlet", urlPatterns = "/star")
@@ -21,7 +22,10 @@ public class SingleStarServlet extends HttpServlet {
 
     public void init(ServletConfig config) {
         try {
-            dataSource = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/moviedb");
+            //dataSource = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/moviedb");
+            Context initCtx = new InitialContext();
+            Context envCtx = (Context) initCtx.lookup("java:comp/env");
+            dataSource = (DataSource) envCtx.lookup("jdbc/SlaveDB"); //  the slave resource
         } catch (NamingException e) {
             e.printStackTrace();
         }

@@ -14,6 +14,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import javax.naming.Context;
 @WebServlet(name = "SingleMovieServlet", urlPatterns = "/mov")
 public class SingleMovieServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -21,7 +22,10 @@ public class SingleMovieServlet extends HttpServlet {
 
     public void init(ServletConfig config) {
         try {
-            dataSource = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/moviedb");
+            //dataSource = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/moviedb");
+            Context initCtx = new InitialContext();
+            Context envCtx = (Context) initCtx.lookup("java:comp/env");
+            dataSource = (DataSource) envCtx.lookup("jdbc/SlaveDB"); //  the slave resource
         } catch (NamingException e) {
             e.printStackTrace();
         }
