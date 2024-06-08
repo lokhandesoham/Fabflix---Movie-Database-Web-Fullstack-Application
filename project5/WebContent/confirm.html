@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Page</title>
+</head>
+<body>
+    <script>
+        console.log("In confirm page");
+        const urlParams = new URLSearchParams(window.location.search);
+        const salesList = urlParams.getAll('salesList');
+        const total = urlParams.get('total');
+
+        console.log("Sales List:", salesList);
+        console.log("Total:", total);
+
+        salesListValues.forEach(sale => {
+        // Split the sale string by '+' to separate the details
+        const saleDetails = sale.split('+');
+
+        // Extract the details from the split array
+        const saleID = saleDetails[0].split('-')[1];
+        const movieName = saleDetails[1].split('-')[1];
+        const quantity = saleDetails[2].split('-')[1];
+        const price = saleDetails[3].split('-')[1];
+
+        // Log the extracted details
+        console.log('SaleID:', saleID);
+        console.log('Movie Name:', movieName);
+        console.log('Quantity:', quantity);
+        console.log('Price:', price);
+        });
+    </script>
+</body>
+</html>
