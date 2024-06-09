@@ -62,7 +62,7 @@ public class AddStarServlet extends HttpServlet {
             //dataSource = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/moviedb");
             Context initCtx = new InitialContext();
             Context envCtx = (Context) initCtx.lookup("java:comp/env");
-            dataSource = (DataSource) envCtx.lookup("jdbc/SlaveDB"); //  the slave resource
+            dataSource = (DataSource) envCtx.lookup("jdbc/MasterDB"); //  the slave resource
         } catch (NamingException e) {
             e.printStackTrace();
         }

@@ -24,7 +24,7 @@ public class AddMovieServlet extends HttpServlet {
         try {
             Context initCtx = new InitialContext();
             Context envCtx = (Context) initCtx.lookup("java:comp/env");
-            dataSource = (DataSource) envCtx.lookup("jdbc/SlaveDB"); //  the slave resource
+            dataSource = (DataSource) envCtx.lookup("jdbc/MasterDB"); //  the slave resource
         } catch (NamingException e) {
             e.printStackTrace();
         }
