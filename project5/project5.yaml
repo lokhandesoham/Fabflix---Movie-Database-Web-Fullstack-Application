@@ -3,7 +3,7 @@ kind: Deployment # Specifies that this resource is a Deployment, used for managi
 metadata:
   name: project5 # Names this Deployment as "murphy-movies".
 spec:
-  replicas: 2 # Indicates that two replicas (pods) of the application should be running.
+  replicas: 3 # Indicates that two replicas (pods) of the application should be running.
   selector:
     matchLabels:
       app: project5 # The selector specifies that this Deployment targets pods with the label "app: murphy-movies".
