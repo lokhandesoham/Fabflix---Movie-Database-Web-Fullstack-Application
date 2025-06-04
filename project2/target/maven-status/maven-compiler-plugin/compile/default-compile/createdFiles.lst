@@ -1,0 +1,10 @@
+GenreList.class
+CartServlet.class
+SingleStarServlet.class
+LoginFilter.class
+PaymentServlet.class
+User.class
+LoginServlet.class
+SaleData.class
+SingleMovieServlet.class
+MoviesServlet.class

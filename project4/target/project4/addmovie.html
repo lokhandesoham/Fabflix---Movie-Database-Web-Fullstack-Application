@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Movie</title>
+</head>
+<body>
+    <div>
+        <button onclick="window.location.href='dashboard.html'">Home</button>
+        <button onclick="window.location.href='addstar.html'">Add a Star</button>
+        <button onclick="window.location.href='main.html'">Browse Movies</button>
+    </div>
+
+    <h1>Add Movie</h1>
+    <form id="addMovieForm">
+        <label for="movieTitle">Movie Title:</label>
+        <input type="text" id="movieTitle" name="movieTitle" required>
+        <br><br>
+        <label for="movieYear">Year:</label>
+        <input type="number" id="movieYear" name="movieYear" required>
+        <br><br>
+        <label for="movieDirector">Director:</label>
+        <input type="text" id="movieDirector" name="movieDirector" required>
+        <br><br>
+        <label for="starName">Star Name:</label>
+        <input type="text" id="starName" name="starName" required>
+        <br><br>
+        <label for="birthYear">Star Birth Year:</label>
+        <input type="text" id="birthYear" name="birthYear">
+        <br><br>
+        <label for="genreName">Genre:</label>
+        <input type="text" id="genreName" name="genreName" required>
+        <br><br>
+        <input type="submit" value="Add Movie">
+    </form>
+
+    <div id="added_message"></div> 
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type='text/javascript' src='addmovie.js'></script>
+</body>
+</html>
