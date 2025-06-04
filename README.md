@@ -20,7 +20,7 @@ Fabflix is a full-stack movie database web application that evolved through five
   - Pagination for movie listings
 
 **Demo**: Watch how we implemented the basic movie browsing and search functionality.
-<iframe width="560" height="315" src="https://www.youtube.com/embed/iZ1VWm8DKR8" title="Project 1 Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[![Project 1 Demo](https://img.youtube.com/vi/iZ1VWm8DKR8/0.jpg)](https://youtu.be/iZ1VWm8DKR8)
 
 ### Project 2: Enhanced Features
 - **Authentication System**
@@ -37,7 +37,7 @@ Fabflix is a full-stack movie database web application that evolved through five
   - Sort by various parameters
 
 **Demo**: See the enhanced features including user authentication and shopping cart functionality.
-<iframe width="560" height="315" src="https://www.youtube.com/embed/rmkFwWX18HU" title="Project 2 Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[![Project 2 Demo](https://img.youtube.com/vi/rmkFwWX18HU/0.jpg)](https://youtu.be/rmkFwWX18HU)
 
 ### Project 3: Performance & Security
 - **Performance Optimizations**
@@ -54,7 +54,7 @@ Fabflix is a full-stack movie database web application that evolved through five
   - Graceful error recovery
 
 **Demo**: Watch how we improved performance and security measures.
-<iframe width="560" height="315" src="https://www.youtube.com/embed/XLGO_DZm-0w" title="Project 3 Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[![Project 3 Demo](https://img.youtube.com/vi/XLGO_DZm-0w/0.jpg)](https://youtu.be/XLGO_DZm-0w)
 
 ### Project 4: Scalability & Redundancy
 - **AWS Infrastructure**
@@ -71,7 +71,7 @@ Fabflix is a full-stack movie database web application that evolved through five
   - Health check monitoring
 
 **Demo**: See how we implemented scalability and redundancy on AWS.
-<iframe width="560" height="315" src="https://www.youtube.com/embed/OCDXsLR7g28" title="Project 4 Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[![Project 4 Demo](https://img.youtube.com/vi/OCDXsLR7g28/0.jpg)](https://youtu.be/OCDXsLR7g28)
 
 ### Project 5: Enterprise Deployment
 - **Containerization**
@@ -88,7 +88,7 @@ Fabflix is a full-stack movie database web application that evolved through five
   - Performance monitoring with Prometheus
 
 **Demo**: Watch our final deployment with Kubernetes and performance testing results.
-<iframe width="560" height="315" src="https://www.youtube.com/embed/jjpRsP2XF_s" title="Project 5 Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[![Project 5 Demo](https://img.youtube.com/vi/jjpRsP2XF_s/0.jpg)](https://youtu.be/jjpRsP2XF_s)
 
 ## Technical Stack
 - **Backend**: Java 8, Tomcat 9, Servlets 4.0
